@@ -11,6 +11,7 @@ def recibir(conn):
             print("\n[Conexión cerrada]")
             break
         print(f"\n[vm1]: {data.decode()}")
+        print("[vm2]: ", end="", flush=True)
 
 def main():
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
@@ -22,7 +23,7 @@ def main():
         print(f"Conectado con {addr[0]}")
         threading.Thread(target=recibir, args=(conn,), daemon=True).start()
         while True:
-            msg = input("")
+            msg = input("[vm2]: ")
             if msg.lower() == "salir":
                 break
             conn.sendall(msg.encode())
